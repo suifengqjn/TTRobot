@@ -81,7 +81,7 @@ MONGODB = {
 FINISHED_TABLE = 'finished_uids'
 
 # ------ selenium相关设置 ------
-CHROME_PATH = 'accessory/chromedriver.exe'
+CHROME_PATH = 'accessory/mac/chromedriver'
 IMG_BIG_PATH = 'img/big.png'
 IMG_BLOCK_PATH = 'img/block.png'
 IMG_S_BIG_PATH = 'img/big_s.png'

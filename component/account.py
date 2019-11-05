@@ -445,6 +445,31 @@ class TTAcount:
                 'fail': f'发布微头条内容失败.',
             }
         }
+    # 文章内容处理
+    def format_content(self, arr):
+
+        result = ""
+        for a in arr:
+            print(type(a))
+            if str(a).startswith("http"):
+                result += self.format_img(a)
+
+            else:
+
+                result += self.format_p(a)
+        return result
+
+    def format_p(self, str):
+        return "<p>{}</p>\n".format(str)
+    def format_img(self, url):
+        res = self.upload_resource_img_by_url(url)
+        width = res.get('width')
+        height = res.get('height')
+        uri = res.get('web_uri')
+        img_url = URL_PGC_IMG_PREFIX + uri
+
+        return "<div class=\"pgc-img\"><img src=\"{}\" data-ic=\"false\" data-height=\"{}\" data-width=\"{}\" image_type=\"1\" mime_type=\"image/jpeg\" web_uri=\"{}\" img_width=\"{}\" img_height=\"{}\"></div>\n".\
+            format(img_url, height, width, uri,width, height)
 
     @action('post', api=API_ARTICLE_POST)
     @login_required
