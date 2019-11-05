@@ -5,7 +5,9 @@
 USERNAME = ''
 PASSWORD = ''
 # 用户cookie,可置空，格式 ： 'tt_web_id=xxxxx;sso_user=xxxx'
-COOKIE = ''
+COOKIE = '__tea_sdk__ssid=undefined;_ga=GA1.2.809841827.1563951644;_mp_auth_key=d8cbd117ee1ff9950f70d331dfe301dc;ccid=4b8c32ed0041939e516bfc6cc28ab58e;login_flag=6a445b2fb46fe1f65710835ac809434d;sessionid=eb01d8e41b41acbe488131c2f99579f3;sid_guard="eb01d8e41b41acbe488131c2f99579f3|1571814520|15552000|Mon\054 20-Apr-2020 07:08:40 GMT";sid_tt=eb01d8e41b41acbe488131c2f99579f3;sso_auth_status=d8cbd117ee1ff9950f70d331dfe301dc;sso_uid_tt=7e6483fb7ce190013bbcba34802fbbba;toutiao_sso_user=1e37f0ed173de7a9eb73ff2dfa8c7cd3;tt_webid=6692336570584778244;uid_tt=5c1d0542419bf40a8039b839dd9ead25;UM_distinctid=16c22471cd0901-07f1f9bfb543fe-37637c02-fa000-16c22471cd1825;uuid="w:a304dcc82b5e4cc898ed0c1e3dea5723";__tasessionId=vvm0406j61571813475524;CNZZDATA1259612802=741716302-1558181541-https%253A%252F%252Fwww.google.com%252F%7C1565576176;csrftoken=53622535ea1f26d530d3998efc5461fa;s_v_web_id=136a0e0c0bac599f1fb929fae07352c6;tt_webid=6692336570584778244;WEATHER_CITY=%E5%8C%97%E4%BA%AC'
+# json
+COOKIEJOSN = 'accessory/toutiao_cookie.json'
 # 存放用户cookie的文件路径
 COOKIE_FILE = 'accessory/cookie.txt'
 

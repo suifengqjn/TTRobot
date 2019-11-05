@@ -5,9 +5,9 @@ import os
 from component.log import getLogger
 from component.dbhelper import Database
 from util.request import send_request
-from config import COOKIE_FILE,COOKIE
+from config import COOKIE_FILE,COOKIE,COOKIEJOSN
 from inspect import isfunction
-
+import json
 logger = getLogger(__name__)
 
 def check(func):
@@ -15,6 +15,12 @@ def check(func):
         cookie = 0
         if COOKIE:
             cookie = COOKIE
+        elif os.path.exists(COOKIEJOSN):
+            try:
+                cookie = getCookieString()
+            except Exception as e:
+                logger.error(f'{e}')
+                return func(self, *args, **kwargs)
         elif os.path.exists(COOKIE_FILE):
             try:
                 with open(COOKIE_FILE,'r') as f:
@@ -91,3 +97,18 @@ def to_do(func):
     def wrapper(self,*args,**kwargs):
         return func(self,*args,**kwargs)
     return wrapper
+
+
+
+def getCookieString():
+    with open(COOKIEJOSN, 'r') as f:
+        cookie = f.read()
+        data = json.loads(cookie)
+        res = ""
+        for d in data:
+            temp = d["name"] + "=" + d["value"]
+            res += temp
+            res += ";"
+        res = res.rstrip(";")
+    print(res)
+    return res
