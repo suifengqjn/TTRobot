@@ -9,10 +9,16 @@ from component.user import TTUser
 if __name__ == '__main__':
     a = TTBot()
     account = a.account
+
+    u0 = TTUser('50502346')
+    if u0._name == None:
+        print("none name")
+
     u = TTUser('50502346173')
-    news_spider = a.news_spider
-    uids = ['50502346173', '4377795668', '3640241275','70105485318','97658287933']
-    account.follow_fans_of_user('65445676041',count=200,ALL=False)
+    print(u.mediaId)
+    # news_spider = a.news_spider
+    # uids = ['50502346173', '4377795668', '3640241275','70105485318','97658287933']
+    # account.follow_fans_of_user('65445676041',count=200,ALL=False)
     # print(a.search(f'古天乐',USER=True,strict=True))
     # print(account.wenda_analysis())
     # print(account.delete_article('6602141020383609358'))

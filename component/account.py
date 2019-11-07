@@ -568,6 +568,9 @@ class TTAcount:
     @login_required
     def post_comment(self, txt, group_id):
         csrftoken = re.findall("csrftoken=(.*)", self.login_headers['cookie'])[0]
+        if ';' in csrftoken:
+            csrftoken = csrftoken.split(';')[0]
+        
         self.login_headers.update({
             'x-csrftoken': csrftoken,
         })

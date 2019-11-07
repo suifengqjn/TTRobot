@@ -15,6 +15,7 @@ def gen_proxy(proxy):
 
 def get_proxy():
     if not PROXY_ENABLE:
+        print("not use proxy")
         return
     if PROXY:
         if not is_url(PROXY):

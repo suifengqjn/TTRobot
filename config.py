@@ -118,7 +118,7 @@ COUNT_SEARCH = 1000
 
 # ------ 代理相关设置 ------
 #是否使用代理
-PROXY_ENABLE = True
+PROXY_ENABLE = False
 #使用单个的代理ip，优先级最高
 #此项若有填写，则使用此代理，后面的代理池PROXY_POOL不会考虑
 # 格式可以为下面几种:
