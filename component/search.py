@@ -58,6 +58,9 @@ class Searcher:
                                     retries=retries,
                                     DATA=1,
                                     headers=self.headers)
+            print(API_SEARCH)
+            print(params)
+            print(self.headers)
             data = response.get('data')
             if bool(data):
                 offset = response.get('offset')

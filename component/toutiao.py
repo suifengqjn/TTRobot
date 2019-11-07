@@ -11,6 +11,7 @@ from config import COUNT_SEARCH,SVWEBID_FILE,SVWEBID
 from settings import ARTICLE,VIDEO,WEITT
 from util.tools import time_to_date
 from util.user import weitt_cleaner
+from  deco import toutiao
 
 logger = getLogger(__name__)
 
@@ -53,8 +54,9 @@ class  TTBot:
         else:
             try:
                 #先查看搜索需要的cookie字段 本地是否存在，不存在则查看config中是否设置
-                with open(SVWEBID_FILE,'r') as f:
-                    cookie = f.read()
+                cookie = toutiao.getCookieString()
+                # with open(SVWEBID_FILE,'r') as f:
+                #     cookie = f.read()
                 if not cookie:
                     cookie = SVWEBID
             except:
@@ -64,6 +66,8 @@ class  TTBot:
                 self.searcher.validate()
             else:
                 self.searcher.headers['cookie']=cookie
+
+            print("search --cookie", cookie)
         return self.searcher.search(keyword,USER=USER,VIDEO=VIDEO,
                                     count=count,ALL=ALL,MDB=MDB,
                                     strict=strict)

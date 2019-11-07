@@ -27,10 +27,14 @@ if __name__ == "__main__":
 
     bot = TTBot()
     account = bot.account
-    # print(account.name)
-    # print(account._account_info)
-    # print(account.media_info)
 
+    print(account.name)
+    print(account._account_info)
+    print(account.media_info)
+
+    account.post_weitt('小鸟：爸爸，爸爸，我饿了老爸：听不见，听不见，听不见')
+
+    time.sleep(1000)
     #publishArt(account)
     #print(account.get_wenda_drafts())
 
@@ -45,7 +49,7 @@ if __name__ == "__main__":
         if now.hour > 22 or now.hour < 6:
             continue
 
-        if index == 1:
+        if index == 0:
             publishArt(account)
         elif index == 2:
             pub_video()

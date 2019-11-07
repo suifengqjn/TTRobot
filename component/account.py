@@ -420,10 +420,17 @@ class TTAcount:
                 uri = json_res.get('data')['web_uri']
                 image_uris.append(uri)
                 web_uri = ','.join(image_uris)
+        elif isinstance(image, str) and image.startswith("http"):
+            res = self.upload_resource_img_by_url(image)
+            web_uri = res.get('data')['web_uri']
         elif image:
             res = self.upload_image(image)
             web_uri = res.get('data')['web_uri']
+
         csrftoken = re.findall("csrftoken=(.*)", self.login_headers['cookie'])[0]
+        if ";" in csrftoken:
+            csrftoken = csrftoken.split(";")[0]
+
         self.login_headers.update({
             'x-csrftoken': csrftoken,
         })
@@ -1425,6 +1432,7 @@ class TTAcount:
         encode_data = encode_multipart_formdata(data)
         data = encode_data[0]
         header['content-type'] = encode_data[1]
+        print(self.login_headers)
         self.login_headers.update(header)
         return {
             'params': data,
