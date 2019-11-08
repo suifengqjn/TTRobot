@@ -6,7 +6,7 @@ class BgTask():
         self.account = account
     def run(self):
 
-        wt = wtt.Wtt("wtt", self.account)
-        wt.start()
+        # wt = wtt.Wtt("wtt", self.account)
+        # wt.start()
 
         print("run")

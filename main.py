@@ -1,13 +1,17 @@
 
 from component.toutiao import TTBot
-from myselenium import fetch
+from myselenium import fetchArticle
 import random
 import time
 import datetime
 
 from task import bgTask
+
+
 def publishArt(account):
-    art_dic = fetch.fetch_articles()
+    print("art...")
+    fe = fetchArticle.Fetch()
+    art_dic = fe.fetch_article()
 
     title = art_dic["title"]
     content_arr = art_dic["content"]
@@ -32,9 +36,7 @@ if __name__ == "__main__":
     print(account._account_info)
     print(account.media_info)
 
-    account.post_weitt('小鸟：爸爸，爸爸，我饿了老爸：听不见，听不见，听不见')
 
-    time.sleep(1000)
     #publishArt(account)
     #print(account.get_wenda_drafts())
 
@@ -49,7 +51,7 @@ if __name__ == "__main__":
         if now.hour > 22 or now.hour < 6:
             continue
 
-        if index == 0:
+        if index == 1:
             publishArt(account)
         elif index == 2:
             pub_video()

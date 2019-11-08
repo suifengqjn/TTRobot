@@ -2,11 +2,29 @@ from myselenium.chromeDriver import model
 import time
 
 
-from selenium.chromeDriver import chrome
-from selenium.chromeDriver import sougou
-from selenium.database import mySqlTool
+from myselenium.chromeDriver import chrome
+from myselenium.chromeDriver import sougou
+from myselenium.database import mySqlTool
 from urllib import parse
 import random
+
+def fetch_article_with_selector(query, func):
+    chr = chrome.ChromeDrive()
+    # 首页句柄
+    mainHandle = chr.driver.current_window_handle
+    global res
+    for index in range(1, 10):
+        url = get_page_urls(query, index)
+        print("------", url)
+        arr = get_articles_with_url(url, chr, mainHandle)
+        for a in arr:
+            v = func(a)
+            if v == True:
+                res = a
+                break
+
+    chr.driver.quit()
+    return res
 
 def fetch_article(query, sql):
 

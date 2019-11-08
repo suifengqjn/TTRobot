@@ -427,14 +427,15 @@ class TTAcount:
             res = self.upload_image(image)
             web_uri = res.get('data')['web_uri']
 
-        csrftoken = re.findall("csrftoken=(.*)", self.login_headers['cookie'])[0]
-        if ";" in csrftoken:
-            csrftoken = csrftoken.split(";")[0]
-
-        self.login_headers.update({
-            'x-csrftoken': csrftoken,
-        })
+        # csrftoken = re.findall("csrftoken=(.*)", self.login_headers['cookie'])[0]
+        # if ";" in csrftoken:
+        #     csrftoken = csrftoken.split(";")[0]
+        #
+        # self.login_headers.update({
+        #     'x-csrftoken': csrftoken,
+        # })
         self.login_headers.update(HEADERS_F)
+        print("login header",self.login_headers)
         return {
             'params': {
                 'content': content,

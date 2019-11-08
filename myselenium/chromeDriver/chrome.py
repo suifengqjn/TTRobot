@@ -1,14 +1,15 @@
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
+import os
 HEADERS = {
     'user-agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36',
 }
 
 class ChromeDrive:
-    def __init__(self, driver_path="chromedriver"):
 
+    def __init__(self, driver_path="chromedriver"):
+        print("工程路径：",os.getcwd())
         self.driver_path = driver_path
         self.header = HEADERS
         chrome_options = Options()
