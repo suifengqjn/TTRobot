@@ -458,7 +458,6 @@ class TTAcount:
 
         result = ""
         for a in arr:
-            print(type(a))
             if str(a).startswith("http"):
                 result += self.format_img(a)
 

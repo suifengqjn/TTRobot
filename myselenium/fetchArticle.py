@@ -26,6 +26,19 @@ class Fetch():
             elif a.startswith("im--"):
                 i_count += 1
                 res_arr.append(a[4:])
+
+
+        with open("./art.txt", "w") as f:
+            f.write("==============================\n")
+            print("==============================")
+            for a in res_arr:
+                if "http" not in a:
+                    print(a)
+                    f.write(a)
+                    f.write("\n")
+            print("==============================")
+            f.write("==============================\n")
+
         return (t_count, i_count, res_arr)
 
     def exist(self, md5) -> bool:

@@ -23,6 +23,7 @@ def ParseEle(html: str) ->(str, str):
 
     new_arr, cover_image = __filter(arr)
     res = __formatHtml(new_arr)
+
     return res, cover_image
 
 
@@ -51,11 +52,12 @@ def __filter(arr):
                 img_arr.append(s)
             firstImage = True
         else:
-            if s not in filter.filter_words:
+
+            if filter.exist_word(s) == False:
                 new_arr.append(s)
 
             if index >= len(arr) * 9 / 10:
-                if s in filter.filter_words:
+                if filter.exist_word(s):
                     stop = True
 
     img_count = len(img_arr)
