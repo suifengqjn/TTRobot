@@ -2,13 +2,14 @@ from myselenium.chromeDriver import chrome
 from myselenium.chromeDriver import filter
 from myselenium.chromeDriver import model
 from myselenium.chromeDriver import bsoup
+from common import util
 
 class Sougou:
     def __init__(self):
         pass
 
     # 获取文章详情
-    def GetPageContent(self, chr:chrome.ChromeDrive, main_window) -> model.wx_article:
+    def GetPageContent(self, chr:chrome.ChromeDrive, main_window, link_title) :
 
         handles = chr.driver.window_handles
         for h in handles:
@@ -16,9 +17,12 @@ class Sougou:
                 chr.driver.switch_to.window(h)
                 break
         title = chr.driver.title
+        if len(title) == 0:
+            title = link_title
+
         print("current title", title)
         if len(title) == 0:
-            return model.wx_article()
+            return None
 
         ele = chr.driver.find_element_by_xpath('//div[@id="js_content"]')
         if ele != None:
@@ -116,14 +120,16 @@ class Sougou:
         #     if deleteIndex > 0:
         #         del lis[deleteIndex]
         #         pArr = list(reversed(lis))
-        print(content)
-        art = model.wx_article()
-        art.title = title
-        art.content = content
-        art.cover_image = cover_img
-        art.md5 = art.getMd5(content)
-        print("content",art.title,art.content, art.md5)
-        return art
+        res = {}
+        if len(title) > 0:
+            res["title"] = title
+        if len(content) > 0:
+            res["content"] = content
+        if len(cover_img) > 0:
+            res["cover_image"] = cover_img
+        res["md5"] = util.Md5(content)
+
+        return res
 
     # def __formatHtml(self, arr):
     #

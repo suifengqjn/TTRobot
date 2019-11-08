@@ -38,7 +38,6 @@ def __filter(arr):
     firstImage = False
     new_arr = []
     stop = False
-    coverImg  = None
     img_arr = []
     for index in range(len(arr)):
 
@@ -60,6 +59,8 @@ def __filter(arr):
                     stop = True
 
     img_count = len(img_arr)
+
+    # 删除最右一张图片
     if img_count >= 2 :
         last_img = img_arr[img_count - 1]
 
@@ -72,8 +73,7 @@ def __filter(arr):
 
 
     coverImg = img_arr[int((len(img_arr) - 1)/2)]
-
-
+    
     return (new_arr, coverImg)
 
 def __formatHtml(arr) -> str:

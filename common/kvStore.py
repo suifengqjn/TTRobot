@@ -2,6 +2,11 @@ import dbm
 
 db_path = './kv_db'
 
+def init():
+    set("a", "alice")
+    v = get("a")
+    print(v)
+
 def set(key,value):
     db = dbm.open(db_path, 'c')
     db[key] = value

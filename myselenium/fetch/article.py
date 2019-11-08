@@ -12,21 +12,18 @@ def fetch_article_with_selector(query, func):
     chr = chrome.ChromeDrive()
     # 首页句柄
     mainHandle = chr.driver.current_window_handle
-    global res
+    article = None
     for index in range(1, 10):
         url = get_page_urls(query, index)
         print("------", url)
-        arr = get_articles_with_url(url, chr, mainHandle)
-        for a in arr:
-            v = func(a)
-            if v == True:
-                res = a
-                break
+        article = get_article_with_url_by_selector(url, chr, mainHandle, func)
+        if article != None:
+            break
 
     chr.driver.quit()
-    return res
+    return article
 
-def fetch_article(query, sql):
+def fetch_articles(query, sql):
 
     chr = chrome.ChromeDrive()
     # 首页句柄
@@ -95,4 +92,42 @@ def get_articles_with_url(url,chr,mainHandle):
         finally:
             chr.CloseOtherWindow(mainHandle)
 
+
+
     return res
+
+
+# 获取一个列表页面的满足条件文章
+def get_article_with_url_by_selector(url, chr, mainHandle, func):
+    chr.driver.get(url)
+    time.sleep(2)
+
+    divs = chr.driver.find_elements_by_xpath("//div[@class=\"txt-box\"]")
+
+    content = None
+    sg = sougou.Sougou()
+    for div in divs:
+
+        time.sleep(3)
+        content = None
+        try:
+            link_title = div.find_element_by_tag_name("h3").text
+
+            link = chr.driver.find_element_by_link_text(link_title)
+            print("link title", link_title)
+            link.click()
+            time.sleep(random.randint(1, 5))
+
+            content = sg.GetPageContent(chr, mainHandle, link_title)
+
+            time.sleep(random.randint(2, 8))
+        except:
+            print('element does not exist')
+
+        finally:
+            chr.CloseOtherWindow(mainHandle)
+
+        if func(content) == True:
+            break
+
+    return content

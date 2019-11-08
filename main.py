@@ -12,6 +12,7 @@ def publishArt(account):
     print("art...")
     fe = fetchArticle.Fetch()
     art_dic = fe.fetch_article()
+    art_dic = fe.format_article(art_dic)
 
     title = art_dic["title"]
     content_arr = art_dic["content"]
@@ -28,6 +29,8 @@ def pub_video():
 
 if __name__ == "__main__":
     print("tt robot running...")
+
+
 
     bot = TTBot()
     account = bot.account
