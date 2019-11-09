@@ -1,13 +1,11 @@
 # -*- coding:utf-8 -*-
 from bs4 import BeautifulSoup
 from myselenium.chromeDriver import filter
-import re
 def ParseEle(html: str) ->(str, str):
 
     print("----", "parse")
-    soup = BeautifulSoup(html, 'html.parser', from_encoding = 'utf8')
+    soup = BeautifulSoup(html, 'html.parser')
     p_set = soup.find_all("p")
-
     arr = []
     for p in p_set:
         txt = __trim(p.get_text())
@@ -16,7 +14,7 @@ def ParseEle(html: str) ->(str, str):
         # print(txt)
         p_html = repr(p)
         if p_html.find("<img") > 0:
-            temp_soup = BeautifulSoup(p_html, 'html.parser', from_encoding = 'utf8')
+            temp_soup = BeautifulSoup(p_html, 'html.parser')
             img = temp_soup.find("img")
             if img.has_attr("data-src"):
                 arr.append(img.get("data-src"))

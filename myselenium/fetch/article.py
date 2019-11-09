@@ -1,10 +1,9 @@
-from myselenium.chromeDriver import model
+
 import time
 
 
 from myselenium.chromeDriver import chrome
 from myselenium.chromeDriver import sougou
-from myselenium.database import mySqlTool
 from urllib import parse
 import random
 

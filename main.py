@@ -1,6 +1,7 @@
 
 from component.toutiao import TTBot
 from myselenium import fetchArticle
+from myselenium.search import toutiao
 import random
 import time
 import datetime
@@ -11,17 +12,24 @@ from task import bgTask
 def publishArt(account):
     print("art...")
     fe = fetchArticle.Fetch()
-    art_dic = fe.fetch_article()
-    art_dic = fe.format_article(art_dic)
+    while True:
+        art_dic = fe.fetch_article()
+        art_dic = fe.format_article(art_dic)
 
-    title = art_dic["title"]
-    content_arr = art_dic["content"]
-    coverImage = art_dic["cover_image"]
-    con = account.format_content(content_arr)
-    account.post_article(title=title,
-                         content=con,
-                         run_ad=True,
-                         cover_img=coverImage)
+        title = art_dic["title"]
+
+        if toutiao.search_keyword(title, 0.8) == False:
+            content_arr = art_dic["content"]
+            coverImage = art_dic["cover_image"]
+            con = account.format_content(content_arr)
+            account.post_article(title=title,
+                                 content=con,
+                                 run_ad=True,
+                                 cover_img=coverImage)
+            break
+
+
+
 
 def pub_video():
     print("pub video")
@@ -30,8 +38,6 @@ def pub_video():
 if __name__ == "__main__":
     print("tt robot running...")
 
-
-
     bot = TTBot()
     account = bot.account
 
@@ -39,9 +45,6 @@ if __name__ == "__main__":
     print(account._account_info)
     print(account.media_info)
 
-
-    #publishArt(account)
-    #print(account.get_wenda_drafts())
 
     # 后台任务
     bg = bgTask.BgTask(account)

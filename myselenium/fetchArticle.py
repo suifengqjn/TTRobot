@@ -9,6 +9,9 @@ txt_limit = 500
 
 
 class Fetch():
+    word_index = 0
+
+
     def __init__(self):
         super().__init__()
 
@@ -77,13 +80,14 @@ class Fetch():
 
     def fetch_article(self) -> dict:
         words = keyWords.fetch_keywords()
-        index = random.randint(0, len(words)-1)
-        word = words[index]
+        if self.word_index >= len(words) - 1:
+            self.word_index = 0
+        word = words[self.word_index]
 
         dict = article.fetch_article_with_selector(query=word, func=self.check_article)
 
         kvStore.set(dict["md5"], "1")
-
+        self.word_index += 1
         return dict
         # articles = article.fetch_article(word, None)
         #
