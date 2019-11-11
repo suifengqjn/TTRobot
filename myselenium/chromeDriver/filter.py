@@ -49,6 +49,19 @@ filter_words = {
 	"回复对应的电影":1,
 	"回复电影":1,
 	"来源：":1,
+	"长安识别":1,
+	"查看更多":1,
+	"编辑":1,
+	"作者":1,
+}
+
+
+filter_title = {
+	"《":1,
+	"》":1,
+	"HD":1,
+	"双语": 1,
+	"国泰": 1,
 }
 
 def exist_word(s)->bool:
@@ -57,3 +70,14 @@ def exist_word(s)->bool:
 			return True
 
 	return False
+
+
+
+
+
+def title_filter_pass(title)->bool:
+	for w in filter_title:
+		if w in title:
+			return False
+
+	return True

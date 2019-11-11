@@ -82,11 +82,14 @@ class Fetch():
         words = keyWords.fetch_keywords()
         if self.word_index >= len(words) - 1:
             self.word_index = 0
+
+        self.word_index = random.randint(0, len(words)-1)
         word = words[self.word_index]
 
         dict = article.fetch_article_with_selector(query=word, func=self.check_article)
-
-        kvStore.set(dict["md5"], "1")
+        print("---", dict)
+        if dict != None and "md5" in dict:
+            kvStore.set(dict["md5"], "1")
         self.word_index += 1
         return dict
         # articles = article.fetch_article(word, None)

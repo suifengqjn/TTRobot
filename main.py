@@ -14,6 +14,8 @@ def publishArt(account):
     fe = fetchArticle.Fetch()
     while True:
         art_dic = fe.fetch_article()
+        if art_dic == None:
+            continue
         art_dic = fe.format_article(art_dic)
 
         title = art_dic["title"]
@@ -54,7 +56,7 @@ if __name__ == "__main__":
     while True:
 
         now = datetime.datetime.now()
-        if now.hour > 22 or now.hour < 6:
+        if now.hour > 23 or now.hour < 6:
             continue
 
         if index == 1:

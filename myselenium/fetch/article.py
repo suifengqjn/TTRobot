@@ -1,10 +1,11 @@
 
 import time
-
+from myselenium.chromeDriver import filter
 
 from myselenium.chromeDriver import chrome
 from myselenium.chromeDriver import sougou
 from urllib import parse
+from datetime import datetime
 import random
 
 def fetch_article_with_selector(query, func):
@@ -109,8 +110,31 @@ def get_article_with_url_by_selector(url, chr, mainHandle, func):
 
         time.sleep(3)
         content = None
+        skip = False
         try:
+
+            # 获取时间
+            time_txt = div.find_element_by_class_name("s2").text
+            if "-" in time_txt:
+                try:
+                    t = datetime.strptime(time_txt, '%Y-%m-%d')
+                    cha = (datetime.now() - t).days
+                    print("time", cha)
+                    if cha > 15:
+                        skip = True
+                    else:
+                        skip = False
+                except Exception:
+                    skip = False
+
+
+            if skip == True:
+                continue
+
             link_title = div.find_element_by_tag_name("h3").text
+
+            if filter.title_filter_pass(link_title) == False:
+                continue
 
             link = chr.driver.find_element_by_link_text(link_title)
             print("link title", link_title)

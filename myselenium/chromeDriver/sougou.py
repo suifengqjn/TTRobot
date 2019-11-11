@@ -20,6 +20,9 @@ class Sougou:
         if len(title) == 0:
             title = link_title
 
+
+        # title filter
+
         print("current title", title)
         if len(title) == 0:
             return None
