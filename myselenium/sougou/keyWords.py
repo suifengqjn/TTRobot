@@ -10,6 +10,7 @@ def time_fetch_keyword():
     fetch_keyword_timer.start()
 
 def fetch_keywords():
+    return ["11月电影推荐"]
     return [
             "2019高分喜剧电影",
             "2019高分科幻电影",

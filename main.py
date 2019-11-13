@@ -19,8 +19,6 @@ def publishArt(account):
         art_dic = fe.format_article(art_dic)
 
         title = art_dic["title"]
-        if len(title) > 3:
-            continue
         if toutiao.search_keyword(title, 0.8) == False:
             content_arr = art_dic["content"]
             coverImage = art_dic["cover_image"]

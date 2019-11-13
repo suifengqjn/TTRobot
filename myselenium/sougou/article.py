@@ -118,7 +118,7 @@ def get_article_with_url_by_selector(url, chr, mainHandle, func):
                     t = datetime.strptime(time_txt, '%Y-%m-%d')
                     cha = (datetime.now() - t).days
                     print("time", cha)
-                    if cha > 15:
+                    if cha > 40:
                         skip = True
                     else:
                         skip = False

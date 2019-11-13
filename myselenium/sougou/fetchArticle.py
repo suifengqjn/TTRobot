@@ -2,9 +2,9 @@ from myselenium.sougou import article, keyWords
 import random
 from common import kvStore
 
-title_limit = 10
+title_limit = 8
 image_limit = 4
-txt_limit = 500
+txt_limit = 300
 
 
 class Fetch():
@@ -56,6 +56,8 @@ class Fetch():
 
         md5 = dict["md5"]
         if kvStore.get(md5) != None:
+
+            print("md5 is exist")
             return False
         title = dict["title"]
         if len(title) < title_limit:
@@ -82,7 +84,6 @@ class Fetch():
             self.word_index = 0
 
         self.word_index = random.randint(0, len(words)-1)
-        self.word_index = 6
         word = words[self.word_index]
 
         dict = article.fetch_article_with_selector(query=word, func=self.check_article)
