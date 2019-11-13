@@ -44,28 +44,28 @@ class Sougou:
         #     return self.__dealContent(ele, title)
         # except:
         #     print("no find js_content")
-    def __find_rich_media_content(self, chr, title):
-        try:
-            ele = chr.driver.find_element_by_xpath('//div[@class="rich_media_content"]')
-            return self.__dealContent(ele, title)
-        except Exception:
-            pass
-        return model.wx_article()
-    def __find_js_content(self, chr, title):
-        try:
-            ele = chr.driver.find_element_by_xpath(r'//[@id="js_content"]')
-            return self.__dealContent(ele, title)
-        except Exception:
-            pass
-        return model.wx_article()
-
-    def __find_class_media_content(self, chr, title:str):
-        try:
-            ele = chr.driver.find_element_by_class_name('rich_media_content')
-            return self.__dealContent(ele, title)
-        except Exception:
-            pass
-        return model.wx_article()
+    # def __find_rich_media_content(self, chr, title):
+    #     try:
+    #         ele = chr.driver.find_element_by_xpath('//div[@class="rich_media_content"]')
+    #         return self.__dealContent(ele, title)
+    #     except Exception:
+    #         pass
+    #     return model.wx_article()
+    # def __find_js_content(self, chr, title):
+    #     try:
+    #         ele = chr.driver.find_element_by_xpath(r'//[@id="js_content"]')
+    #         return self.__dealContent(ele, title)
+    #     except Exception:
+    #         pass
+    #     return model.wx_article()
+    #
+    # def __find_class_media_content(self, chr, title:str):
+    #     try:
+    #         ele = chr.driver.find_element_by_class_name('rich_media_content')
+    #         return self.__dealContent(ele, title)
+    #     except Exception:
+    #         pass
+    #     return model.wx_article()
 
     def __dealContent(self, element,title):
 

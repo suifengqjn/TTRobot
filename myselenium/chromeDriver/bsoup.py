@@ -17,7 +17,9 @@ def ParseEle(html: str) ->(str, str):
             temp_soup = BeautifulSoup(p_html, 'html.parser')
             img = temp_soup.find("img")
             if img.has_attr("data-src"):
-                arr.append(img.get("data-src"))
+                url = img.get("data-src")
+                if ".mp4" not in url:
+                    arr.append(img.get("data-src"))
 
     new_arr, cover_image = __filter(arr)
     res = __formatHtml(new_arr)

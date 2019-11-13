@@ -459,7 +459,9 @@ class TTAcount:
         result = ""
         for a in arr:
             if str(a).startswith("http"):
-                result += self.format_img(a)
+                img = self.format_img(a)
+                if img != None:
+                    result += self.format_img(a)
 
             else:
 
@@ -470,6 +472,8 @@ class TTAcount:
         return "<p>{}</p>\n".format(str)
     def format_img(self, url):
         res = self.upload_resource_img_by_url(url)
+        if "web_uri" not in res:
+            return None
         width = res.get('width')
         height = res.get('height')
         uri = res.get('web_uri')
