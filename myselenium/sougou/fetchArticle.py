@@ -30,14 +30,13 @@ class Fetch():
                 res_arr.append(a[4:])
 
 
-        with open("./art.txt", "w") as f:
+        with open("./art.txt", "a+") as f:
             f.write("==============================\n")
             print("==============================")
             for a in res_arr:
-                if "http" not in a:
-                    print(a)
-                    f.write(a)
-                    f.write("\n")
+                print(a)
+                f.writelines(a)
+                f.writelines("\n")
             print("==============================")
             f.write("==============================\n")
 
@@ -83,6 +82,7 @@ class Fetch():
             self.word_index = 0
 
         self.word_index = random.randint(0, len(words)-1)
+        self.word_index = 6
         word = words[self.word_index]
 
         dict = article.fetch_article_with_selector(query=word, func=self.check_article)

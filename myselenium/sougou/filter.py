@@ -66,6 +66,16 @@ filter_title = {
 
 # 最后10行文字，遇到 stop
 filter_footer = {
+	"为防止": 1,
+	"看不到我们": 1,
+	"请务必": 1,
+	"点击上方": 1,
+	"右上角菜单": 1,
+	"设为星标": 1,
+	"底部阅读原文": 1,
+	"公众号内": 1,
+	"回复片名": 1,
+	"不可抗力": 1,
 	"转载":1,
 	"公众号": 1,
 	"二维码": 1,
@@ -91,7 +101,12 @@ def exist_word(s)->bool:
 	return False
 
 
+def footer_filter_pass(s) -> bool:
+	for w in filter_footer:
+		if w in s:
+			return False
 
+	return True
 
 
 def title_filter_pass(title)->bool:

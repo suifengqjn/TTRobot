@@ -1,4 +1,11 @@
 {
-
-
+  "filter": {
+    "article": {
+      "line": [10, 10],
+      "length": 400
+    },
+    "img": {
+      "line": [3, 4]
+    }
+  }
 }

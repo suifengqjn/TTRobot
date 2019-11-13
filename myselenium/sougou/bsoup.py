@@ -1,8 +1,8 @@
 # -*- coding:utf-8 -*-
 from bs4 import BeautifulSoup
 from myselenium.sougou import filter
-
-
+from common import myQrCode
+from projectCon import global_con
 def ParseEle(html: str) ->(str, str):
 
     print("----", "parse")
@@ -19,21 +19,42 @@ def ParseEle(html: str) ->(str, str):
             img = temp_soup.find("img")
             if img.has_attr("data-src"):
                 url = img.get("data-src")
-                if ".mp4" not in url:
-                    arr.append(img.get("data-src"))
+                arr.append(url)
 
     new_arr, cover_image = __filter(arr)
     res = __formatHtml(new_arr)
 
     return res, cover_image
 
-
+# 文章内容进行逐行过滤
 def __filter(arr):
+
+    text_count = 0
+    img_count = 0
+    for s in arr:
+        if s.startswith("http"):
+            img_count += 1
+        else:
+            text_count += 1
+
+
+    # 图片规则
+    # 去掉首张，前面几张和后面几张 校验二维码
+    img_con = global_con.SingletonCon.config["filter"]["img"]["line"]
+    img_start = img_con[0]
+    img_end = img_con[1]
+
+    # 文字
+    txt_con = global_con.SingletonCon.config["filter"]["article"]["line"]
+    txt_start = txt_con[0]
+    txt_end = txt_con[1]
 
     firstImage = False
     new_arr = []
     stop = False
     img_arr = []
+    txt_arr = []
+    use_img_arr = []
     for index in range(len(arr)):
 
         if stop:
@@ -41,34 +62,36 @@ def __filter(arr):
 
         s = arr[index]
         if s.startswith("http"):
+
             if firstImage == True:
-                new_arr.append(s)
-                img_arr.append(s)
+                if len(img_arr)<= img_start or len(img_arr) >= (img_count-img_end):
+                    if myQrCode.isQrCodeImg(s) == False:
+                        new_arr.append(s)
+                        use_img_arr.append(s)
+                    elif len(img_arr) >= (img_count-img_end):
+                        stop = True
+                else:
+                    new_arr.append(s)
             firstImage = True
+            img_arr.append(s)
         else:
+            #头部过滤
+            if len(txt_arr) < txt_start:
+                if filter.exist_word(s) == False:
+                    new_arr.append(s)
+            else:
+                # 尾部截止
+                if len(txt_arr) >= (text_count - txt_end):
+                    if filter.footer_filter_pass(s) == False:
+                        stop = True
+                else:
+                    new_arr.append(s)
 
-            if filter.exist_word(s) == False:
-                new_arr.append(s)
+            txt_arr.append(s)
 
-            if index >= len(arr) * 9 / 10:
-                if filter.exist_word(s):
-                    stop = True
-
-    img_count = len(img_arr)
-
-    # 删除最后一张图片
-    if img_count >= 2 :
-        last_img = img_arr[img_count - 1]
-
-        delIndex = 0
-        for i in range(len(new_arr)):
-            if last_img == new_arr[i]:
-                delIndex = i
-                break
-        del new_arr[delIndex]
-
-
-    coverImg = img_arr[int((len(img_arr) - 1)/2)]
+    coverImg = None
+    if len(use_img_arr) > 0 :
+        coverImg = use_img_arr[0]
 
     return (new_arr, coverImg)
 
