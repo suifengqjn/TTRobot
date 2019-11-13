@@ -3,7 +3,7 @@ import json
 class SingletonCon():
 
     toutiao_cookie_list = None
-
+    config = None
     def __init__(self):
         self.__readConfig()
 
@@ -22,6 +22,12 @@ class SingletonCon():
             print("single __readConfig",data)
             self.toutiao_cookie_list = data
 
+        config_path = cur_path + "/source/config.json"
+        with open(config_path, 'r') as f:
+            data = json.load(f)
+            print("single __readConfig",data)
+            self.config = data
+
     @property
     def cookieString(self):
         res = ''
@@ -35,9 +41,3 @@ class SingletonCon():
         return res
 
 
-
-
-if __name__ == "__main__":
-
-    con =  SingletonCon()
-    print(con.toutiao_cookie)

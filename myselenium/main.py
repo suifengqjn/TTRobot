@@ -1,14 +1,6 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 import time
 
-
-from myselenium.chromeDriver import chrome
-from myselenium.chromeDriver import sougou
-from urllib import parse
-
-from myselenium.fetch import keyWords
-from myselenium.fetch import article
+from myselenium.sougou import article, keyWords
 from myselenium.database import mySqlTool
 
 if __name__ == "__main__":

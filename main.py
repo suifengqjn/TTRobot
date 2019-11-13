@@ -1,6 +1,6 @@
 
 from component.toutiao import TTBot
-from myselenium import fetchArticle
+from myselenium.sougou import fetchArticle
 from myselenium.search import toutiao
 import random
 import time

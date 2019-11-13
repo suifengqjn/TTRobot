@@ -1,9 +1,8 @@
 
 import time
-from myselenium.chromeDriver import filter
 
 from myselenium.chromeDriver import chrome
-from myselenium.chromeDriver import sougou
+from myselenium.sougou import parseContent, filter
 from urllib import parse
 from datetime import datetime
 import random
@@ -58,7 +57,7 @@ def get_articles_with_url(url,chr,mainHandle):
     divs = chr.driver.find_elements_by_xpath("//div[@class=\"txt-box\"]")
 
     res = []
-    sg = sougou.Sougou()
+    sg = parseContent.Sougou()
     for div in divs:
         # print(divs[i].get_attribute("href"))
         # print(divs[i].text)
@@ -105,14 +104,13 @@ def get_article_with_url_by_selector(url, chr, mainHandle, func):
     divs = chr.driver.find_elements_by_xpath("//div[@class=\"txt-box\"]")
 
     content = None
-    sg = sougou.Sougou()
+    sg = parseContent.Sougou()
     for div in divs:
 
         time.sleep(3)
         content = None
         skip = False
         try:
-
             # 获取时间
             time_txt = div.find_element_by_class_name("s2").text
             if "-" in time_txt:

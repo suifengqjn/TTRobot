@@ -1,5 +1,4 @@
 from myselenium.database import mySqlTool
-from myselenium.fetch import keyWords
 import time
 
 def ptint():

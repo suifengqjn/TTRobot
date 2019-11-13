@@ -1,10 +1,8 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 import time
 
 
 from myselenium.chromeDriver import chrome
-from myselenium.chromeDriver import sougou
+from myselenium.sougou import parseContent
 from urllib import parse
 
 if __name__ == "__main__":
@@ -24,7 +22,7 @@ if __name__ == "__main__":
     divs = chr.driver.find_elements_by_xpath("//div[@class=\"txt-box\"]")
 
 
-    sg = sougou.Sougou()
+    sg = parseContent.Sougou()
     for div in divs:
         # print(divs[i].get_attribute("href"))
         # print(divs[i].text)

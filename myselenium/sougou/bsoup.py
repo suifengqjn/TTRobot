@@ -1,6 +1,8 @@
 # -*- coding:utf-8 -*-
 from bs4 import BeautifulSoup
-from myselenium.chromeDriver import filter
+from myselenium.sougou import filter
+
+
 def ParseEle(html: str) ->(str, str):
 
     print("----", "parse")
@@ -11,7 +13,6 @@ def ParseEle(html: str) ->(str, str):
         txt = __trim(p.get_text())
         if len(txt) > 5:
             arr.append(txt)
-        # print(txt)
         p_html = repr(p)
         if p_html.find("<img") > 0:
             temp_soup = BeautifulSoup(p_html, 'html.parser')
@@ -26,13 +27,6 @@ def ParseEle(html: str) ->(str, str):
 
     return res, cover_image
 
-
-
-    # t_list = soup.find_all(re.compile("(p|img)"))
-    # for item in t_list:
-    #     print(item.get_text())
-    #     if item.has_attr("data-src"):
-    #         print(item.get("data-src"))
 
 def __filter(arr):
 
@@ -81,6 +75,8 @@ def __filter(arr):
 def __formatHtml(arr) -> str:
 
     res = []
+    pArr = []
+    imgArr = []
     for s in arr:
         if s.startswith("http"):
             res.append(__formatImg(s))

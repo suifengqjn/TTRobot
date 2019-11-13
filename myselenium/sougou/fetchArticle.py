@@ -1,5 +1,4 @@
-from myselenium.fetch import keyWords
-from myselenium.fetch import article
+from myselenium.sougou import article, keyWords
 import random
 from common import kvStore
 

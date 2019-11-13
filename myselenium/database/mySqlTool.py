@@ -1,7 +1,5 @@
 
 import pymysql
-from myselenium.chromeDriver import model
-import json
 class MySqlTool():
 
     def __init__(self, host,user,password,database, charset="utf8mb4", port=3306):

@@ -1,7 +1,5 @@
 from myselenium.chromeDriver import chrome
-from myselenium.chromeDriver import filter
-from myselenium.chromeDriver import model
-from myselenium.chromeDriver import bsoup
+from myselenium.sougou import bsoup
 from common import util
 
 class Sougou:
@@ -77,52 +75,6 @@ class Sougou:
         html = element.get_attribute('innerHTML')
         content, cover_img = bsoup.ParseEle(html)
 
-        #print("========",len(ps))
-        # 去掉首张图片
-        # firstImage = False
-        # cover_image = ""
-        # stop = False
-        # index = 0
-        # for p in ps:
-        #
-        #     if stop == True:
-        #         break
-        #
-        #     try:
-        #         text = p.text
-        #         if text != None and text != "\"" and text != "\"\"" and text != "'" and text != "''":
-        #             # 尾部截取
-        #             if index >= len(ps) * 9 / 10:
-        #                 if text in filter.filter_words:
-        #                     stop = True
-        #                 else:
-        #                     pArr.append(text)
-        #             else:
-        #                 pArr.append(text)
-        #
-        #         img = p.find_element_by_tag_name("img").get_attribute("data-src")
-        #         if img != None:
-        #             if firstImage == True:
-        #                 pArr.append(img)
-        #             firstImage = True
-        #             if len(pArr) == 2:
-        #                 cover_image = img
-        #     except:
-        #         pass
-        #
-        #     index += 1
-        #
-        # # 去掉最后一张图片
-        # if stop == False:
-        #     lis = list(reversed(pArr))
-        #     deleteIndex = 0
-        #     for i in range(len(lis)):
-        #         if lis[i].startswith("http"):
-        #             deleteIndex = i
-        #             break
-        #     if deleteIndex > 0:
-        #         del lis[deleteIndex]
-        #         pArr = list(reversed(lis))
         res = {}
         if len(title) > 0:
             res["title"] = title
