@@ -40,12 +40,12 @@ def __filter(arr):
 
     # 图片规则
     # 去掉首张，前面几张和后面几张 校验二维码
-    img_con = global_con.SingletonCon.config["filter"]["img"]["line"]
+    img_con = global_con.SingletonCon().instance().config["filter"]["img"]["line"]
     img_start = img_con[0]
     img_end = img_con[1]
 
     # 文字
-    txt_con = global_con.SingletonCon.config["filter"]["article"]["line"]
+    txt_con = global_con.SingletonCon().instance().config["filter"]["article"]["line"]
     txt_start = txt_con[0]
     txt_end = txt_con[1]
 

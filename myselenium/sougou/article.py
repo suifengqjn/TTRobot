@@ -7,7 +7,7 @@ from urllib import parse
 from datetime import datetime
 import random
 
-def fetch_article_with_selector(query, func):
+def fetch_article_with_selector(query,days_limit, func):
     chr = chrome.ChromeDrive()
     # 首页句柄
     mainHandle = chr.driver.current_window_handle
@@ -15,7 +15,7 @@ def fetch_article_with_selector(query, func):
     for index in range(1, 10):
         url = get_page_urls(query, index)
         print("------", url)
-        article = get_article_with_url_by_selector(url, chr, mainHandle, func)
+        article = get_article_with_url_by_selector(url, chr, mainHandle,days_limit func)
         if article != None:
             break
 
@@ -80,12 +80,12 @@ def get_articles_with_url(url,chr,mainHandle):
             link.click()
             time.sleep(random.randint(1,5))
 
-            content = sg.GetPageContent(chr, mainHandle)
+            content = sg.GetPageContent(chr, mainHandle,link_title)
             if len(content.title) > 6 and len(content.content) > 10:
                 res.append(content)
 
             time.sleep(random.randint(2,8))
-        except:
+        except Exception:
             print('element does not exist')
 
         finally:
@@ -97,7 +97,7 @@ def get_articles_with_url(url,chr,mainHandle):
 
 
 # 获取一个列表页面的满足条件文章
-def get_article_with_url_by_selector(url, chr, mainHandle, func):
+def get_article_with_url_by_selector(url, chr, mainHandle, dayslimit, func):
     chr.driver.get(url)
     time.sleep(2)
 
@@ -118,7 +118,7 @@ def get_article_with_url_by_selector(url, chr, mainHandle, func):
                     t = datetime.strptime(time_txt, '%Y-%m-%d')
                     cha = (datetime.now() - t).days
                     print("time", cha)
-                    if cha > 15:
+                    if cha > dayslimit:
                         skip = True
                     else:
                         skip = False
