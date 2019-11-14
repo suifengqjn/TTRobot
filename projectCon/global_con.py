@@ -4,6 +4,8 @@ class SingletonCon():
 
     toutiao_cookie_list = None
     config = None
+    article = None
+    img = None
     def __init__(self):
         self.__readConfig()
 
@@ -28,6 +30,9 @@ class SingletonCon():
             print("single __readConfig",data)
             self.config = data
 
+        self.article = self.config["filter"]["article"]
+        self.img = self.config["filter"]["img"]
+
     @property
     def cookieString(self):
         res = ''
@@ -39,5 +44,4 @@ class SingletonCon():
 
         res = res.rstrip(";")
         return res
-
 

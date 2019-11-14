@@ -26,7 +26,8 @@ def publishArt(account):
             account.post_article(title=title,
                                  content=con,
                                  run_ad=True,
-                                 cover_img=coverImage)
+                                 cover_img=coverImage,
+                                 timer_time="")
             break
 
 

@@ -41,7 +41,6 @@ def __filter(arr):
     # 图片规则
     # 去掉首张，前面几张和后面几张 校验二维码
     img_con = global_con.SingletonCon.instance().config["filter"]["img"]["line"]
-    print(img_con)
     img_start = img_con[0]
     img_end = img_con[1]
 
@@ -91,8 +90,8 @@ def __filter(arr):
             txt_arr.append(s)
 
     coverImg = None
-    if len(use_img_arr) > 0:
-        coverImg = use_img_arr[len(use_img_arr)/2]
+    if len(use_img_arr) > 0 :
+        coverImg = use_img_arr[0]
 
     return (new_arr, coverImg)
 

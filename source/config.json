@@ -2,10 +2,13 @@
   "filter": {
     "article": {
       "line": [10, 10],
-      "length": 400
+      "content_limit": 400,
+      "title_limit": 10,
+      "days_limit": 30
     },
     "img": {
-      "line": [3, 4]
+      "line": [3, 4],
+      "image_limit": 2
     }
   }
 }

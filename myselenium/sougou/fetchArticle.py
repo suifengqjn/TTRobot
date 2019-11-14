@@ -1,15 +1,17 @@
 from myselenium.sougou import article, keyWords
 import random
 from common import kvStore
+from projectCon import global_con
 
-title_limit = 8
-image_limit = 4
-txt_limit = 300
 
 
 class Fetch():
     word_index = 0
 
+    title_limit = global_con.SingletonCon.instance().article["title_limit"]
+    image_limit = global_con.SingletonCon.instance().img["image_limit"]
+    txt_limit = global_con.SingletonCon.instance().article["content_limit"]
+    days_limit = global_con.SingletonCon.instance().article["days_limit"]
 
     def __init__(self):
         super().__init__()
@@ -56,16 +58,14 @@ class Fetch():
 
         md5 = dict["md5"]
         if kvStore.get(md5) != None:
-
-            print("md5 is exist")
             return False
         title = dict["title"]
-        if len(title) < title_limit:
+        if len(title) < self.title_limit:
             return False
 
         content = dict["content"]
         tc, ic, con = self.img_txt_count(content)
-        if tc < txt_limit or ic < image_limit:
+        if tc < self.txt_limit or ic < self.image_limit:
             return False
 
         return True
@@ -86,35 +86,10 @@ class Fetch():
         self.word_index = random.randint(0, len(words)-1)
         word = words[self.word_index]
 
-        dict = article.fetch_article_with_selector(query=word, func=self.check_article)
+        dict = article.fetch_article_with_selector(query=word,days_limit=self.days_limit, func=self.check_article)
         print("---", dict)
         if dict != None and "md5" in dict:
             kvStore.set(dict["md5"], "1")
         self.word_index += 1
         return dict
-        # articles = article.fetch_article(word, None)
-        #
-        # for ar in articles:
-        #     dict = ar.__dict__
-        #
-        #     md5 = dict["md5"]
-        #     if kvStore.get(md5) != None :
-        #         continue
-        #     title = dict["title"]
-        #     if len(title) < title_limit:
-        #         continue
-        #
-        #     content = dict["content"]
-        #     tc, ic, con = img_txt_count(content)
-        #     if tc < txt_limit or ic < image_limit:
-        #         continue
-        #
-        #     param = {}
-        #     param["title"] = title
-        #     param["content"] = con
-        #     param["md5"] = dict["md5"]
-        #     param["cover_image"] = dict["cover_image"]
-        #
-        #     kvStore.set(md5,"1")
-        #
-        #     return param
+
