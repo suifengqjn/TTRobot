@@ -22,7 +22,7 @@ def search_keyword(word, similar)->bool:
     chr.driver.get(baidu)
     time.sleep(2)
 
-    con = global_con.SingletonCon()
+    con = global_con.SingletonCon.instance()
     for c in con.toutiao_cookie_list:
         chr.driver.add_cookie(c)
 

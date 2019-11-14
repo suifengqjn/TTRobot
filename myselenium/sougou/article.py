@@ -15,7 +15,7 @@ def fetch_article_with_selector(query,days_limit, func):
     for index in range(1, 10):
         url = get_page_urls(query, index)
         print("------", url)
-        article = get_article_with_url_by_selector(url, chr, mainHandle,days_limit func)
+        article = get_article_with_url_by_selector(url, chr, mainHandle,days_limit, func)
         if article != None:
             break
 

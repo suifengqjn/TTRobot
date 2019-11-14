@@ -1,6 +1,13 @@
 
-import datetime
+from projectCon import global_con
 
-now = datetime.datetime.now()
 
-print(now.hour)
+s = global_con.SingletonCon.instance()
+
+print(s)
+
+
+
+s = global_con.SingletonCon.instance()
+
+print(s)

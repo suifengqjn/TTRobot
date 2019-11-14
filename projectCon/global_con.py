@@ -30,8 +30,8 @@ class SingletonCon():
             print("single __readConfig",data)
             self.config = data
 
-        self.article = self.config["article"]
-        self.img = self.config["img"]
+        self.article = self.config["filter"]["article"]
+        self.img = self.config["filter"]["img"]
 
     @property
     def cookieString(self):
@@ -44,5 +44,4 @@ class SingletonCon():
 
         res = res.rstrip(";")
         return res
-
 

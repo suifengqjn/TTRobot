@@ -8,10 +8,10 @@ from projectCon import global_con
 class Fetch():
     word_index = 0
 
-    title_limit = global_con.SingletonCon().instance().article["title_limit"]
-    image_limit = global_con.SingletonCon().instance().img["image_limit"]
-    txt_limit = global_con.SingletonCon().instance().article["content_limit"]
-    days_limit = global_con.SingletonCon().instance().article["days_limit"]
+    title_limit = global_con.SingletonCon.instance().article["title_limit"]
+    image_limit = global_con.SingletonCon.instance().img["image_limit"]
+    txt_limit = global_con.SingletonCon.instance().article["content_limit"]
+    days_limit = global_con.SingletonCon.instance().article["days_limit"]
 
     def __init__(self):
         super().__init__()
