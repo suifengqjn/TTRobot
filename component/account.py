@@ -460,7 +460,7 @@ class TTAcount:
         for a in arr:
             if str(a).startswith("http"):
                 img = self.format_img(a)
-                if img != None:
+                if img != None and isinstance(img, str):
                     result += self.format_img(a)
 
             else:

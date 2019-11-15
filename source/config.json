@@ -4,7 +4,7 @@
       "line": [10, 10],
       "content_limit": 400,
       "title_limit": 10,
-      "days_limit": 30
+      "days_limit": 40
     },
     "img": {
       "line": [3, 4],
