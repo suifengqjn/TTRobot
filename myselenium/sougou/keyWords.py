@@ -1,16 +1,41 @@
 
-import threading
+import requests
+from common import kvStore
+index = 0
+def getRandomKeyWords():
 
-queryList = []
 
-def time_fetch_keyword():
-    fetch_keywords()
-    global fetch_keyword_timer
-    fetch_keyword_timer = threading.Timer(60*60*8, time_fetch_keyword)#
-    fetch_keyword_timer.start()
+    words = fetch_keywords()
+    global  index
+    print(index)
+    if index >= len(words):
+        index = -1
+
+    while True:
+        if index == len(words):
+            word = "最新电影推荐"
+            break
+        word = words[index]
+        if kvStore.get(word) != None:
+            index += 1
+        else:
+            break
+
+    index += 1
+    kvStore.set(word, "1")
+    return word
+
+
 
 def fetch_keywords():
-    return [
+
+    url = "http://106.12.220.252:8765/hot_words"
+    response = requests.get(url)
+    data = response.json()
+    if data != None and data["code"] == 1:
+        return data["data"]
+    else:
+        return [
             "2019高分喜剧电影",
             "2019高分科幻电影",
             "2019高分国产剧",
@@ -19,3 +44,9 @@ def fetch_keywords():
             "2019高分战争电影",
             "2019高分悬疑电影",
              "2019高分动作电影"]
+
+
+
+if __name__ == "__main__":
+    for i in range(1):
+        print(getRandomKeyWords())
