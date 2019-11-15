@@ -27,4 +27,6 @@ def image_detect():
     print(res)
 
 if __name__ == "__main__":
-    image_detect()
+    v = isQrCodeImg("https://mmbiz.qpic.cn/mmbiz_jpg/ggI6C4WmicXiaH6dWTv86mcRRSXOfsKRl9Djll1tjQrtovpwzWydbEO0PMHErCegxiaialabIIYAJBIcNEHicFMby8g/640?wx_fmt=jpeg")
+
+    print(v)
