@@ -4,9 +4,14 @@ from common import kvStore
 index = 0
 def getRandomKeyWords():
 
-
     words = fetch_keywords()
     global  index
+
+    v = kvStore.get("word_index")
+    if v != None:
+        index = v
+
+
     print(index)
     if index >= len(words):
         index = -1
@@ -23,6 +28,7 @@ def getRandomKeyWords():
 
     index += 1
     kvStore.set(word, "1")
+    kvStore.set("word_index", index)
     return word
 
 
