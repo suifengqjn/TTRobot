@@ -96,6 +96,13 @@ filter_footer = {
 	"24小时过级计划": 1,
 }
 
+def exist_head(s)->bool:
+	for w in filter_header:
+		if w in s:
+			return True
+
+	return False
+
 def exist_word(s)->bool:
 	for w in filter_words:
 		if w in s:

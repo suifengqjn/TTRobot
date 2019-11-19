@@ -77,7 +77,7 @@ def __filter(arr):
         else:
             #头部过滤
             if len(txt_arr) < txt_start:
-                if filter.exist_word(s) == False:
+                if filter.exist_head(s) == False:
                     new_arr.append(s)
             else:
                 # 尾部截止
