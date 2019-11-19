@@ -1,10 +1,10 @@
 {
   "filter": {
     "article": {
-      "line": [10, 10],
-      "content_limit": 400,
+      "line": [5, 8],
+      "content_limit": 500,
       "title_limit": 10,
-      "days_limit": 40
+      "days_limit": 30
     },
     "img": {
       "line": [3, 4],
