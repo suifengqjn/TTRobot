@@ -62,7 +62,7 @@ def get_articles_with_url(url,chr,mainHandle):
         # print(divs[i].get_attribute("href"))
         # print(divs[i].text)
         #
-        # print(div.get_attribute('innerHTML'))
+        # text
         time.sleep(3)
         #
         # print("a title")

@@ -32,7 +32,6 @@ def getRandomKeyWords():
     return word
 
 
-
 def fetch_keywords():
 
     url = "http://106.12.220.252:8765/hot_words"
